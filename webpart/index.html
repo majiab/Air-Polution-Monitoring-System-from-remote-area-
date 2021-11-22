@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+
+
+<html lang="en">
+    <head>
+	  <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+      <meta name="Qunatum Solution" content="Qunatum Computer Solution">
+	  <meta http-equiv="Access-Control-Allow-Origin" content="*">
+      <script type="text/javascript">
+		document.write([
+			"\<script src='",
+			("https:" == document.location.protocol) ? "https://" : "http://",
+			"ajax.googleapis.com/ajax/libs/jquery/1.2.6/jquery.min.js' type='text/javascript'>\<\/script>" 
+		].join(''));
+	  </script>
+      <style>
+          p { font-size: 2.0rem; }
+      .units { font-size: 1.2rem; }
+      .dht-labels{
+        font-size: 1.5rem;
+        vertical-align:middle;
+        padding-bottom: 15px;
+      }
+      .wrapper{
+    display: flex;
+    flex-flow: row wrap;
+    text-align: center;
+}
+.wrapper>*{
+    padding: 10px;
+    margin: 10px;
+    flex: 1 100%;
+    border-radius: 10px;
+}
+.header{
+
+    background: dimgray;
+    height: 120px;
+}
+.fotter{
+
+    background: rgb(177, 169, 169);
+    height: 80px;
+}
+.main{
+
+    text-align: left;
+    background: slategray;
+    height:auto;
+    
+    font-size: 24px;
+}
+      </style>
+      <!--link rel="stylesheet" href="basiccss.css"-->
+      <title>Tittle of the Project </title>
+    </head>
+    <body>
+ <div class="wrapper">
+     <header class="header">
+         <h1 style="font-family: Helvetica;color: white;"> Air Polution Monitoring System From Remote Area </h1>
+     </header>
+<article class="main">
+    <div class="center">
+        <div align="center" class="form">
+            <br><br>
+             <p style = 'line-height: 60px;font-family: Helvetica;color: #fff;font-size: 50px;' id="temperature">
+                 <img src = 'temperature.png' height="60px" width="60px" style='vertical-align: middle' /> <span class="dht-labels ">Temperature : </span> 00.00
+             </p>
+             <p style = 'line-height: 60px;font-family: Helvetica;color: #fff;font-size: 50px;' id="humidity">
+                 <img src = 'humidity.png' height="60px" width="60px" style='vertical-align: middle' /> <span class="dht-labels">Humidity : </span> 00.00
+             </p>
+             <p style = 'line-height: 60px;font-family: Helvetica;color: #fff;font-size: 50px;' id="gas">
+                <img src = 'gas.png' height="60px" width="60px" style='vertical-align: middle' /><span class="dht-labels">Gas Value : </span>  00.00
+            </p>
+           
+            <p style = 'line-height: 60px;font-family: Helvetica;color: #fff;font-size: 50px;' id="air">
+                <img src = 'gas.png' height="60px" width="60px" style='vertical-align: middle' /><span class="dht-labels">Air Status : </span>  0
+            </p>
+            <p style = 'line-height: 60px;font-family: Helvetica;color: #fff;font-size: 50px;' id="pump">
+                <img src = 'pump.jpg' height="60px" width="60px" style='vertical-align: middle' /><span class="dht-labels">Pump Status : </span>  0
+            </p>
+            <p style = 'line-height: 60px;font-family: Helvetica;color: #fff;font-size: 50px;' id="email">
+                <img src = 'email.png' height="60px" width="60px" style='vertical-align: middle' /><span class="dht-labels">Email Status : </span>  0
+           
+            <p>
+                <i class="far fa-clock" style="font-size:1.0rem;color:#e3a8c7;"></i>
+                <span style="font-size:1.0rem;">Time </span>
+                <span id="time" style="font-size:1.0rem;"></span>
+                
+                <i class="far fa-calendar-alt" style="font-size:1.0rem;color:#dab71c;"></i>
+                <span style="font-size:1.0rem;">Date </span>
+                <span id="date" style="font-size:1.0rem;"></span>
+              </P>
+         </div>
+     </div>
+</article>
+<footer class="fotter">
+    <h4 style="font-family: Helvetica;color: rgb(59, 55, 55);"> &copy; 2021 | <a href="http://www.dec.edu.et/">Defence University Colleage Of Engineering ,CIT Department</a> | <a href="#">IoT live Monitring System</a> </h4>
+</footer>
+ </div>
+ <script>
+window.onload = function() {
+            loaddata();
+        };
+		function loaddata(){
+				var url = "https://iotliveweather.000webhostapp.com/station/read_all1.php";
+				$.getJSON(url, function(data) {
+                    var val= data;
+                  
+                   var temper=(data['weathers'][(Object.keys(data['weathers']).length)-1]['temp']);
+                   var humid=(data['weathers'][(Object.keys(data['weathers']).length)-1]['hum']);
+                   var gasvalue=(data['weathers'][(Object.keys(data['weathers']).length)-1]['gasvalue']);
+                   var gas=(data['weathers'][(Object.keys(data['weathers']).length)-1]['gas']);
+                   var pump=(data['weathers'][(Object.keys(data['weathers']).length)-1]['pump']);
+                   var email=(data['weathers'][(Object.keys(data['weathers']).length)-1]['email']);
+                   
+                   document.getElementById("temperature").innerHTML = "<img src = 'temperature.png' height=\"60px\" width=\"60px\" style='vertical-align: middle' />  " +temper;
+                   document.getElementById("humidity").innerHTML = "<img src = 'humidity.png' height=\"60px\" width=\"60px\" style='vertical-align: middle' />  "+humid;
+                   document.getElementById("gas").innerHTML = "<img src = 'gas.png' height=\"60px\" width=\"60px\" style='vertical-align: middle' />  "+gasvalue;
+                   document.getElementById("air").innerHTML = "<img src = 'gas.png' height=\"60px\" width=\"60px\" style='vertical-align: middle' />  "+gas;
+                   document.getElementById("pump").innerHTML = "<img src = 'pump.jpg' height=\"60px\" width=\"60px\" style='vertical-align: middle' />  "+pump;
+                   document.getElementById("email").innerHTML = "<img src = 'email.png' height=\"60px\" width=\"60px\" style='vertical-align: middle' />  "+email;
+                  
+					console.log(data['weather'][(Object.keys(data['weather']).length)-1]['temp']);
+				});
+            
+        }
+        window.setInterval(function(){
+        loaddata();
+            }, 5000);
+
+    function Time_Date() {
+        var t = new Date();
+        document.getElementById("time").innerHTML = t.toLocaleTimeString();
+        var d = new Date();
+        const dayNames = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday","Saturday"];
+        const monthNames = ["January", "February", "March", "April", "May", "June","July", "August", "September", "October", "November", "December"];
+        document.getElementById("date").innerHTML = dayNames[d.getDay()] + ", " + d.getDate() + "-" + monthNames[d.getMonth()] + "-" + d.getFullYear();
+      }
+    setInterval(function() {
+        // Call a function repetatively with 2 Second interval
+        loaddata();
+      }, 2000); 
+    setInterval(function() {
+      // Call a function repetatively with 1 Second interval
+      Time_Date();
+    }, 1000); 
+    </script>
+    </body>
+</html>
